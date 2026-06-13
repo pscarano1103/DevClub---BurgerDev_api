@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import authConfig from '../../config/auth.js'
+import authConfig from '../../config/auth.js';
 
 class SessionController {
   async store(request, response) {
@@ -51,9 +51,13 @@ class SessionController {
       emailOrPasswordIncorrect();
     }
 
-    const token = jwt.sign({id: existingUser.id}, authConfig.secret,{
-      expiresIn: authConfig.expiresIn
-    })
+    const token = jwt.sign(
+      { id: existingUser.id, admin: existingUser.admin },
+      authConfig.secret,
+      {
+        expiresIn: authConfig.expiresIn,
+      },
+    );
 
     return response.status(200).json({
       id: existingUser.id,
