@@ -1,8 +1,9 @@
-import * as Yup from 'yup';
+// biome-ignore assist/source/organizeImports: <explanation>
+import authConfig from '../../config/auth.js';
+import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import authConfig from '../../config/auth.js';
+import * as Yup from 'yup';
 
 class SessionController {
   async store(request, response) {
@@ -52,7 +53,11 @@ class SessionController {
     }
 
     const token = jwt.sign(
-      { id: existingUser.id, admin: existingUser.admin },
+      {
+        id: existingUser.id,
+        admin: existingUser.admin,
+        name: existingUser.name,
+      },
       authConfig.secret,
       {
         expiresIn: authConfig.expiresIn,
