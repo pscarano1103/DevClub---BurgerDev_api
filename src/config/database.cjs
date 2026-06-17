@@ -2,8 +2,8 @@ module.exports = {
   dialect: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'admin',
-  password: '641955',
+  username: 'postgres',
+  password: 'postgres',
   database: 'dev-burger-db',
   define: {
     timestamps: true,
